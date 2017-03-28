@@ -12,6 +12,15 @@ import java.util.Observer;
 
 public class TicTacToeGUI extends JFrame  {
 
+    /**
+     * Initially when the program loads, the game is
+     not yet begun. In this state, the main game buttons are disabled and cannot be clicked.
+     The user is able to edit the players' names. The initial name text is
+     "Player 1" for the first player and "Player 2" for the second player. If
+     the user types an illegal player name, a dialog box (option pane)
+     appears reading, "Illegal player name(s)." and the game does not begin.
+     */
+
     //Swing Variables for Board
     JFrame frame;
     JPanel panel;
@@ -20,7 +29,7 @@ public class TicTacToeGUI extends JFrame  {
     //Swing Variables for Player 1
     JLabel player1;
     JLabel player1Name;
-    JTextArea player1NameEntry;
+    JTextField player1NameEntry;
     JLabel player1WinsLabel;
     JLabel player1LossesLabel;
     Integer player1Wins = 0;
@@ -29,7 +38,7 @@ public class TicTacToeGUI extends JFrame  {
     //Swing Variables for Player 2
     JLabel player2;
     JLabel player2Name;
-    JTextArea player2NameEntry;
+    JTextField player2NameEntry;
     JLabel player2WinsLabel;
     JLabel player2LossesLabel;
     Integer player2Wins = 0;
@@ -39,6 +48,8 @@ public class TicTacToeGUI extends JFrame  {
     JButton newGameButton;
     JButton resetButton;
     JButton exitButton;
+
+    boolean isGameStarted;
 
 
 
@@ -60,28 +71,10 @@ public class TicTacToeGUI extends JFrame  {
         JPanel playerTwoPanel = new JPanel();
         playerTwoPanel.setLayout(new BoxLayout(playerTwoPanel, BoxLayout.Y_AXIS));
 
-
-        /**
-         * This was my attempt of getting the name and text area on one line.
-         *
-        playerOnePanel.setLayout(new GridBagLayout());
-        frame.getContentPane().add(playerOnePanel);
-        GridBagConstraints left = new GridBagConstraints();
-        left.anchor = GridBagConstraints.EAST;
-        GridBagConstraints right = new GridBagConstraints();
-        right.weightx = 2.0;
-        right.fill = GridBagConstraints.HORIZONTAL;
-        right.gridwidth = GridBagConstraints.REMAINDER;
-
-         * Then when you add it to the panel you add it like
-         * playerOnePanel.add(player1NameEntry, right);
-         */
-
-
         //Swing Variables for Player 1
         player1 = new JLabel("Player 1 (x): ");
         player1Name = new JLabel("Name: ");
-        player1NameEntry = new JTextArea();
+        player1NameEntry = new JTextField();
         player1WinsLabel = new JLabel("Wins: ");
         player1LossesLabel = new JLabel("Losses: ");
 
@@ -94,12 +87,10 @@ public class TicTacToeGUI extends JFrame  {
         playerOnePanel.setBorder(BorderFactory.createLineBorder(Color.gray, 1));
         playerOnePanel.setBorder(BorderFactory.createCompoundBorder(new EmptyBorder(10, 30, 10, 10), new EtchedBorder()));
 
-
-
         //Swing Variables for Player 2
         player2 = new JLabel("Player 2 (o): ");
         player2Name = new JLabel("Name: ");
-        player2NameEntry = new JTextArea();
+        player2NameEntry = new JTextField();
         player2WinsLabel = new JLabel("Wins: ");
         player2LossesLabel = new JLabel("Losses: ");
 
@@ -151,13 +142,73 @@ public class TicTacToeGUI extends JFrame  {
         buttonMenu.add(resetButton);
         buttonMenu.add(exitButton);
 
+
         buttonMenu.setBorder(BorderFactory.createLineBorder(Color.gray, 1));
         buttonMenu.setBorder(BorderFactory.createCompoundBorder(new EmptyBorder(10, 10, 10, 10), new EtchedBorder()));
 
         frame.add(buttonMenu, BorderLayout.SOUTH);
 
         frame.setVisible(true);
+    }
 
+
+    public void newGame() {
+
+        if(!isGameStarted || player1Name.getText() == "" || player2Name.getText() == "") {
+
+            exitButton.setEnabled(false);
+            resetButton.setEnabled(false);
+
+            //Loop through Board Buttons
+            for (int i = 0; i < buttons.length; i++) {
+                buttons[i].setEnabled(false);
+            }
+
+        } else if(newGameButton.getModel().isPressed() && player1Name.getText() != "" && player2Name.getText() != "" ) {
+
+
+            newGameButton.addActionListener(e -> {
+                System.out.println("It works.");
+
+                exitButton.setEnabled(true);
+                resetButton.setEnabled(true);
+
+                //Loop through Board Buttons
+                for (int i = 0; i < buttons.length; i++) {
+                    buttons[i].setEnabled(true);
+                }
+                isGameStarted = true;
+
+            });
+
+        } else {
+                player1NameEntry.addActionListener(e -> {
+                        //If the user enters a null name for Player 1
+                        if(player1NameEntry.getText() == "") {
+
+
+
+                        } else {
+
+
+                        }
+                });
+
+            player2NameEntry.addActionListener(e -> {
+                //If the user enters a null name for Player 1
+                if(player2NameEntry.getText() == "") {
+
+
+
+                } else {
+
+
+                }
+            });
+
+
+            }
+        }
 
     }
 
