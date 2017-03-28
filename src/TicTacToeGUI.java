@@ -35,6 +35,13 @@ public class TicTacToeGUI extends JFrame  {
     Integer player2Wins = 0;
     Integer player2Lossess = 0;
 
+    //Swing Variables for Button Menu
+    JButton newGameButton;
+    JButton resetButton;
+    JButton exitButton;
+
+
+
     /**
      * Constructs the GUI and displays it on the screen.
      */
@@ -127,8 +134,31 @@ public class TicTacToeGUI extends JFrame  {
 
         frame.getContentPane().add (panel);
         frame.pack();
+        frame.setSize(500, 500);
+
+
+        /**
+         * Buttons on bottom of GUI
+         */
+        JPanel buttonMenu = new JPanel();
+        buttonMenu.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+        newGameButton = new JButton("New Game");
+        resetButton = new JButton("Reset");
+        exitButton = new JButton("Exit");
+
+        buttonMenu.add(newGameButton);
+        buttonMenu.add(resetButton);
+        buttonMenu.add(exitButton);
+
+        buttonMenu.setBorder(BorderFactory.createLineBorder(Color.gray, 1));
+        buttonMenu.setBorder(BorderFactory.createCompoundBorder(new EmptyBorder(10, 10, 10, 10), new EtchedBorder()));
+
+        frame.add(buttonMenu, BorderLayout.SOUTH);
+
         frame.setVisible(true);
-        frame.setSize(500, 500);// set frame size and let teh game begin
+
+
     }
 
 }
