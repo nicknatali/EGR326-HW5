@@ -1,10 +1,11 @@
+/**
+ * Calls the GUI application and starts the game
+ * @author Nick Natali
+ * @author Renden Yoder
+ */
 import javax.swing.*;
 
-/**
- * Created by NickNatali on 3/17/17.
- */
 public class TicTacToeMain {
-
     public static void main(String args[]) {
         SwingUtilities.invokeLater(new Runnable(){
             public void run() {
